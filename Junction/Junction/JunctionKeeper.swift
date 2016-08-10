@@ -13,13 +13,17 @@ internal final class JunctionKeeper {
     
     private init() { }
     
+    private func getPath() -> String {
+        let filename = "JunctionData.plist"
+        let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        return documentDirectory.stringByAppendingString("/\(filename)")
+    }
+    
     private func createPlistIfNeeded() -> Bool {
         var exists = false
-        let plist = "JunctionData.plist"
         let fileManager = NSFileManager.defaultManager()
         
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let path = documentDirectory.stringByAppendingString("/\(plist)")
+        let path = JunctionKeeper.sharedInstance.getPath()
         
         if !fileManager.fileExistsAtPath(path) {
             let emptyData = NSDictionary(dictionary: [:])
@@ -50,34 +54,31 @@ internal final class JunctionKeeper {
         return dict
     }
     
-    internal func addValueToCustomOption(key: String, value: AnyObject) -> Bool {
+    internal func addValueToArray(key: String, value: AnyObject) -> Bool {
         createPlistIfNeeded()
         
-        let filename = "JunctionData.plist"
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let path = documentDirectory.stringByAppendingString("/\(filename)")
-        
-        guard let previousArrayValues = loadAllData()![key] else {
-            return addValueForKey(key, value: [value])
-        }
+        let path = JunctionKeeper.sharedInstance.getPath()
         
         let previousValues = loadAllData()?.mutableCopy()
-        
-        previousArrayValues.addObject(value)
-        
-        let dictionary = NSDictionary(dictionary: [key: previousArrayValues])
-        
-        previousValues?.addEntriesFromDictionary(dictionary as [NSObject: AnyObject])
-        
-        return previousValues!.writeToFile(path, atomically: true)
+
+        if let previousValuesUnwrapped = previousValues?[key] as? NSArray {
+            let newValuesToPass = previousValuesUnwrapped.arrayByAddingObject(value)
+            previousValues?.addEntriesFromDictionary([key: newValuesToPass])
+            
+            return previousValues!.writeToFile(path, atomically: true)
+        } else {
+            let newValuesToPass = [value]
+
+            previousValues?.addEntriesFromDictionary([key: newValuesToPass])
+            
+            return previousValues!.writeToFile(path, atomically: true)
+        }
     }
     
     internal func addValueForKey(key: String, value: AnyObject) -> Bool {
         createPlistIfNeeded()
         
-        let filename = "JunctionData.plist"
-        let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let path = documentDirectory.stringByAppendingString("/\(filename)")
+        let path = JunctionKeeper.sharedInstance.getPath()
         
         let dictionary = NSDictionary(dictionary: [key: value])
         
@@ -86,5 +87,29 @@ internal final class JunctionKeeper {
         previousValues?.addEntriesFromDictionary(dictionary as [NSObject : AnyObject])
         
         return previousValues!.writeToFile(path, atomically: true)
+    }
+    
+    internal func deleteValueFromArray(key: String, valueToDelete: AnyObject) -> Bool {
+        createPlistIfNeeded()
+        
+        let path = JunctionKeeper.sharedInstance.getPath()
+        
+        if let previousValues = loadAllData()?.mutableCopy() as? NSDictionary {
+            if var valuesForKey = previousValues[key] as? [AnyObject] {
+                let index = valuesForKey.indexOf({ (object) -> Bool in
+                    return object.isEqual(valueToDelete)
+                })
+                
+                if let index = index {
+                    let previous = loadAllData()?.mutableCopy()
+                    valuesForKey.removeAtIndex(index)
+                    
+                    previous?.addEntriesFromDictionary([key: valuesForKey])
+                    previous?.writeToFile(path, atomically: true)
+                }
+            }
+        }
+        
+        return false
     }
 }

@@ -14,12 +14,21 @@ public final class IntMultipleChoiceSetting: MultipleChoiceBase<Int> {
             return
         }
         
-        JunctionKeeper.sharedInstance.addValueToCustomOption("\(key)_customOption", value: value)
-        rows.append(StringSetting(placeholder: nil, defaultValue: nil, key: key, value: String(value), title: nil))
-        possibleValues.append(MultipleChoiceOption(value: value, isInitialValue: false))
+        let options = JunctionKeeper.sharedInstance.getValueWithKey(key.customOption)
+        if let options = options as? [Int] {
+            if !options.contains(value) {
+                JunctionKeeper.sharedInstance.addValueToArray(key.customOption, value: value)
+                rows.append(StringSetting(placeholder: nil, defaultValue: nil, key: key, value: String(value), title: nil))
+                possibleValues.append(MultipleChoiceOption(value: value, isInitialValue: false))
+            }
+        } else {
+            JunctionKeeper.sharedInstance.addValueToArray(key.customOption, value: value)
+            rows.append(StringSetting(placeholder: nil, defaultValue: nil, key: key, value: String(value), title: nil))
+            possibleValues.append(MultipleChoiceOption(value: value, isInitialValue: false))
+        }
     }
     
-    public override init(possibleValues: [MultipleChoiceOption<Int>], enableCustom: Bool, name: String, key: String) {
-        super.init(possibleValues: possibleValues, enableCustom: enableCustom, name: name, key: key)
+    public override init(possibleValues: [MultipleChoiceOption<Int>], customOption: CustomOption, name: String, key: String, isMultiSelect: Bool) {
+        super.init(possibleValues: possibleValues, customOption: customOption, name: name, key: key, isMultiSelect: isMultiSelect)
     }
 }
