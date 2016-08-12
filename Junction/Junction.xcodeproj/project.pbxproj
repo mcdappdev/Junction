@@ -12,6 +12,8 @@
 		3917C2751D5B95C100F392B7 /* CustomOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3917C2741D5B95C100F392B7 /* CustomOption.swift */; };
 		3917C2771D5B994500F392B7 /* JunctionSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3917C2761D5B994500F392B7 /* JunctionSetup.swift */; };
 		3917C2791D5B9AAC00F392B7 /* ExampleJunctionSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3917C2781D5B9AAC00F392B7 /* ExampleJunctionSetup.swift */; };
+		3917C27B1D5BC26100F392B7 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3917C27A1D5BC26100F392B7 /* ColorPickerViewController.swift */; };
+		3917C27D1D5BC56D00F392B7 /* ColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3917C27C1D5BC56D00F392B7 /* ColorTableViewCell.swift */; };
 		395D962D1D3973CE009229BF /* MultipleChoiceOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395D962C1D3973CE009229BF /* MultipleChoiceOption.swift */; };
 		39F325FD1D36875800A24E74 /* InputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F325FC1D36875800A24E74 /* InputTableViewCell.swift */; };
 		39F3260F1D36877700A24E74 /* IntSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F325FE1D36877700A24E74 /* IntSetting.swift */; };
@@ -56,6 +58,8 @@
 		3917C2741D5B95C100F392B7 /* CustomOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOption.swift; sourceTree = SOURCE_ROOT; };
 		3917C2761D5B994500F392B7 /* JunctionSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JunctionSetup.swift; sourceTree = SOURCE_ROOT; };
 		3917C2781D5B9AAC00F392B7 /* ExampleJunctionSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleJunctionSetup.swift; sourceTree = "<group>"; };
+		3917C27A1D5BC26100F392B7 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = SOURCE_ROOT; };
+		3917C27C1D5BC56D00F392B7 /* ColorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		395D962C1D3973CE009229BF /* MultipleChoiceOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipleChoiceOption.swift; path = Junction/MultipleChoiceOption.swift; sourceTree = SOURCE_ROOT; };
 		39CBDD941D1D77B100CA2124 /* Junction.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Junction.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F325FC1D36875800A24E74 /* InputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputTableViewCell.swift; path = Junction/InputTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -120,6 +124,7 @@
 			children = (
 				3917C2701D5B69A300F392B7 /* LabelTableViewCell.swift */,
 				39F325FC1D36875800A24E74 /* InputTableViewCell.swift */,
+				3917C27C1D5BC56D00F392B7 /* ColorTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 		39CBDD961D1D77B100CA2124 /* Junction */ = {
 			isa = PBXGroup;
 			children = (
+				3917C27A1D5BC26100F392B7 /* ColorPickerViewController.swift */,
 				3917C2721D5B7B3E00F392B7 /* StringExtensions.swift */,
 				395D962C1D3973CE009229BF /* MultipleChoiceOption.swift */,
 				39F326011D36877700A24E74 /* Junction.swift */,
@@ -359,6 +365,7 @@
 				39F3261B1D36877700A24E74 /* Setting.swift in Sources */,
 				39F3261E1D36877700A24E74 /* StringSetting.swift in Sources */,
 				39F326161D36877700A24E74 /* JunctionWindow.swift in Sources */,
+				3917C27D1D5BC56D00F392B7 /* ColorTableViewCell.swift in Sources */,
 				39F325FD1D36875800A24E74 /* InputTableViewCell.swift in Sources */,
 				39F3261A1D36877700A24E74 /* SectionType.swift in Sources */,
 				39F326171D36877700A24E74 /* RowType.swift in Sources */,
@@ -368,6 +375,7 @@
 				39F326191D36877700A24E74 /* SectionModifiedDelegate.swift in Sources */,
 				395D962D1D3973CE009229BF /* MultipleChoiceOption.swift in Sources */,
 				39F326151D36877700A24E74 /* JunctionViewController.swift in Sources */,
+				3917C27B1D5BC26100F392B7 /* ColorPickerViewController.swift in Sources */,
 				3917C2731D5B7B3E00F392B7 /* StringExtensions.swift in Sources */,
 				39F326131D36877700A24E74 /* JunctionDesign.swift in Sources */,
 				39F326181D36877700A24E74 /* Section.swift in Sources */,
